@@ -4,7 +4,7 @@ from datetime import datetime
 from matplotlib import pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
-import pandas as pd
+import pandas as pd 
 
 
 def scale_function(training_set):

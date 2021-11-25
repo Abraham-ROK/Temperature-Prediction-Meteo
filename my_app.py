@@ -22,7 +22,7 @@ from PIL import Image
 
 from Map import display_map
 from Weather_Data import data_generator,data_pre_processing
-from Prophet_model import load_Prophet_model, prediction_Prophet_model, plot_func
+#from Prophet_model import load_Prophet_model, prediction_Prophet_model, plot_func
 from LSTM_model import predtion_LSTM_model, plot_prep, data_structure_creation, inverse_transforme, scale_function, func_plot
 #import pystan
 #from prophet.plot import plot_plotly
