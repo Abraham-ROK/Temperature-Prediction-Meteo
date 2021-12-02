@@ -102,11 +102,11 @@ boutton1 = sided.button('raw data')
 boutton2 = sided.button('raw data + little data process')
 boutton3 = sided.button('Clean data')
 boutton4 = sided.button('raw map')
-boutton5 = sided.button('Location that i spend most of my time')
+boutton5 = sided.button('Locations where i have been the most')
 boutton6 = sided.button('weather data')
 boutton7 = sided.button('weather data after pre_processing features')
 boutton8 = sided.button('LSTM')
-boutton9 = sided.button('Prophet')
+#boutton9 = sided.button('Prophet')
 
 if boutton0:
     # title of my app and write somthing in it 
@@ -141,17 +141,17 @@ elif boutton6:
     st.dataframe(data.head(3))
 elif boutton7:
     training_set, dataset_train,cols,datelist_train = data_pre_processing(data)
-    st.write('weather data after pre_processing features')
+    st.write('weather data after features pre_processing')
     dataset_train.style.highlight_max(axis=0)
     st.dataframe(dataset_train.head(3)) 
 elif boutton8:
     fig = func_plot(PREDICTIONS_FUTURE,PREDICTION_TRAIN,dataset_train)
     st.pyplot(fig)
-elif boutton9:
-    st.markdown("---")
-    st.text("Prophet Visualisation")
-    st.image("download.png")
-    st.image("download (1).png")
+#elif boutton9:
+#    st.markdown("---")
+#    st.text("Prophet Visualisation")
+#    st.image("download.png")
+#    st.image("download (1).png")
 
 
 
