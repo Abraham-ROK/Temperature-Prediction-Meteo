@@ -23,7 +23,8 @@ from PIL import Image
 from Map import display_map
 from Weather_Data import data_generator,data_pre_processing
 #from Prophet_model import load_Prophet_model, prediction_Prophet_model, plot_func
-from LSTM_model import predtion_LSTM_model, plot_prep, data_structure_creation, inverse_transforme, scale_function, func_plot
+from LSTM_Model import predtion_LSTM_model, plot_prep, data_structure_creation, inverse_transforme, scale_function, func_plot
+from Data_Process import Data_cleaning 
 #import pystan
 #from prophet.plot import plot_plotly
 #from plotly import graph_objs as go
@@ -45,32 +46,34 @@ st.title('My Meteo/Temperature Prediction')
 #st.image(image, caption='Meteo')
 
 
+###################
+#df = pd.read_json('Location History.json')
 
-df = pd.read_json('Location History.json')
+#list_dico = df.values.tolist()
+##list_dico
 
-list_dico = df.values.tolist()
-#list_dico
+#new_df = pd.DataFrame([ list_of_dico[0] for list_of_dico in list_dico])
+##new_df
 
-new_df = pd.DataFrame([ list_of_dico[0] for list_of_dico in list_dico])
-#new_df
+#list_of_columns_to_keep = ['timestampMs',
+#                           'latitudeE7',
+#                           'longitudeE7',
+ #                         'altitude']
 
-list_of_columns_to_keep = ['timestampMs',
-                           'latitudeE7',
-                           'longitudeE7',
-                          'altitude']
-
-clean_data = new_df[list_of_columns_to_keep].copy()
-clean_data.columns = ['Date',
-                      'Latitude',
-                      'Longitude',
-                     'Altitude']
+#clean_data = new_df[list_of_columns_to_keep].copy()
+#clean_data.columns = ['Date',
+#                      'Latitude',
+#                      'Longitude',
+#                     'Altitude']
 #clean_data
 #new_df
 
-clean_data['Date'] = pd.to_datetime(clean_data['Date'], unit = 'ms')
-clean_data['Latitude'] = clean_data['Latitude'].map(lambda X : X / 1E7)
-clean_data['Longitude'] = clean_data['Longitude'].map(lambda X : X / 1E7)
+#clean_data['Date'] = pd.to_datetime(clean_data['Date'], unit = 'ms')
+#clean_data['Latitude'] = clean_data['Latitude'].map(lambda X : X / 1E7)
+#clean_data['Longitude'] = clean_data['Longitude'].map(lambda X : X / 1E7)
 
+#################
+clean_data, df, new_df = Data_cleaning ()
 
 ## location extration
 principal_loc = clean_data.groupby(['Longitude', 'Latitude','Altitude']).size().sort_values(ascending=False).reset_index()
@@ -94,6 +97,7 @@ y_pred_future = inverse_transforme(sc_predict,predictions_future)
 y_pred_train = inverse_transforme(sc_predict,predictions_train)
 
 datelist_future_ , PREDICTIONS_FUTURE, PREDICTION_TRAIN, dataset_train = plot_prep(dataset_train,datelist_train,y_pred_future, y_pred_train,cols,n_future,n_past)
+
 
 sided = st.sidebar
 
